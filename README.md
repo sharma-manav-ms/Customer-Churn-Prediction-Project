@@ -1,4 +1,4 @@
-# 🚀 Customer Churn Prediction
+# 🚀 Customer Churn Prediction App
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-XGBoost-green)
@@ -8,17 +8,21 @@
 
 ## 📌 Problem Statement
 
-Customer churn is one of the biggest challenges for subscription-based businesses. Losing customers directly impacts revenue and growth.
-This project aims to **predict whether a customer will churn** so that companies can take proactive measures to retain them.
+Customer churn is a major challenge for subscription-based businesses. Retaining customers is often more cost-effective than acquiring new ones.
+
+This project predicts **whether a customer is likely to churn**, enabling businesses to take proactive retention actions.
 
 ---
 
 ## 💡 Solution Overview
 
-This project uses a **Machine Learning model (XGBoost)** to predict churn probability based on customer data.
-It also integrates **SHAP (SHapley Additive exPlanations)** to explain *why* a prediction was made.
+This project builds an **end-to-end Machine Learning pipeline**:
 
-An interactive **Streamlit web app** allows users to input customer details and get real-time predictions.
+* Data preprocessing & feature engineering
+* Model training using **XGBoost**
+* Model evaluation using ROC-AUC and confusion matrix
+* Explainability using **SHAP**
+* Deployment via an interactive **Streamlit app**
 
 ---
 
@@ -26,101 +30,81 @@ An interactive **Streamlit web app** allows users to input customer details and 
 
 * 🔍 Predict churn probability
 * 📊 Risk classification (Low / Medium / High)
-* 🧠 Model explainability using SHAP
-* 📈 Visual insights with SHAP summary & waterfall plots
-* 🎯 User-friendly Streamlit interface
+* 🧠 SHAP-based explainability (why prediction happened)
+* 📈 Visual insights (feature importance, SHAP plots)
+* 🎯 Interactive UI for real-time predictions
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Programming:** Python
-* **Libraries:** Scikit-learn, XGBoost, SHAP, Pandas, NumPy
-* **Visualization:** Matplotlib, Seaborn
-* **Deployment/UI:** Streamlit
+* **Python**
+* **Scikit-learn**
+* **XGBoost**
+* **SHAP**
+* **Pandas, NumPy**
+* **Matplotlib, Seaborn**
+* **Streamlit**
 
 ---
 
 ## 📊 Model Performance
 
 * **ROC-AUC Score:** 0.84
-* **Validation:** 5-Fold Cross Validation
-* **Handling Imbalance:** scale_pos_weight in XGBoost
-
----
-
-## ⚖️ Model Comparison
-
-| Model               | ROC-AUC |
-| ------------------- | ------- |
-| Logistic Regression | 0.78    |
-| Random Forest       | 0.82    |
-| XGBoost             | 0.84    |
-
----
-
-## 🔍 Key Insights
-
-* Customers with **month-to-month contracts** are more likely to churn
-* **Fiber optic users** show higher churn probability
-* **Online security services** reduce churn risk
-* Higher monthly charges can increase churn likelihood
-
----
-
-## 📈 Business Recommendations
-
-* 🎯 Encourage customers to switch to long-term contracts
-* 💰 Offer discounts or retention offers to high-risk users
-* 🔒 Promote add-on services like online security
-* 📞 Target high-risk customers with personalized outreach
-
----
-
-## 🧠 Model Explainability (SHAP)
-
-* 🔴 Red bars → Increase churn probability
-* 🔵 Blue bars → Decrease churn probability
-* 📏 Longer bars → Greater impact on prediction
-
-This helps in understanding the **reason behind each prediction**, making the model transparent and trustworthy.
+* **Cross Validation:** 5-Fold
+* **Class Imbalance Handling:** scale_pos_weight
 
 ---
 
 ## 📸 Screenshots
 
-### 🔹 Application Interface
-
-(Add your screenshot here)
-
-### 🔹 Prediction Output
-
-(Add your screenshot here)
-
-### 🔹 SHAP Explanation
-
-(Add your screenshot here)
-
 ### 🔹 Model Evaluation
 
-(Add your screenshot here)
+![Model Evaluation](shap_plots/evaluation.png)
+
+### 🔹 Feature Importance
+
+![Feature Importance](shap_plots/feature_importance.png)
+
+### 🔹 SHAP Summary Plot
+
+![SHAP Summary](shap_plots/shap_summary.png)
+
+### 🔹 SHAP Dependence Plot
+
+![SHAP Dependence](shap_plots/shap_dependence.png)
 
 ---
 
-## 🚀 Live Demo
+## 🧠 Model Explainability (SHAP)
 
-👉 (Add your Streamlit deployment link here)
+* 🔴 Red → Increases churn probability
+* 🔵 Blue → Decreases churn probability
+* 📏 Larger values → Higher impact
+
+This makes the model **transparent and interpretable**, not a black box.
+
+---
+
+## 🔍 Key Insights
+
+* 📉 Month-to-month contracts → **highest churn risk**
+* 🌐 Fiber optic users → higher churn probability
+* 💰 Higher monthly charges → increased churn
+* 🔒 Online security & support → reduce churn
 
 ---
 
 ## 📈 Business Recommendations
-* Encourage long-term contracts to reduce churn
-* Offer incentives for high-risk customers
-* Promote online security services to improve retention
+
+* Encourage **long-term contracts**
+* Offer **discounts to high-risk customers**
+* Promote **security & support services**
+* Target churn-risk users with **retention campaigns**
 
 ---
 
-## 🛠 Installation & Setup
+## 🚀 How to Run
 
 Clone the repository:
 
@@ -135,7 +119,13 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Run the application:
+Train the model:
+
+```bash
+python train_model_fixed.py
+```
+
+Run the app:
 
 ```bash
 streamlit run app.py
@@ -149,31 +139,32 @@ streamlit run app.py
 Customer-Churn-Prediction-Project/
 │
 ├── app.py
+├── train_model_fixed.py
 ├── model/
+├── shap_plots/
 ├── data/
-├── notebooks/
 ├── requirements.txt
 ├── README.md
 ```
 
 ---
 
-## 📌 Future Improvements
+## 🔮 Future Improvements
 
-* 🌐 Deploy the app online (Streamlit Cloud)
-* 📊 Add more model comparisons
-* ⚡ Improve UI/UX design
-* 🔄 Real-time data integration
+* 🌐 Deploy on Streamlit Cloud
+* 📊 Add multiple model comparison
+* 🎨 Improve UI/UX design
+* ⚡ Real-time prediction API
 
 ---
 
 ## 👨‍💻 Author
 
 **Manav Sharma**
-📌 Aspiring Data Scientist | Machine Learning Enthusiast
+Aspiring Data Scientist | Machine Learning Enthusiast
 
 ---
 
-## ⭐ If you like this project
+## ⭐ Support
 
-Give it a ⭐ on GitHub and share it!
+If you found this project useful, give it a ⭐ and share it!
