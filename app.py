@@ -98,7 +98,7 @@ def main():
     st.divider()
 
     if not os.path.exists(MODEL_PATH):
-        st.error("🚨 Model not found. Please run `python train_model.py` first.")
+        st.error("🚨 Model not found. Please run `python train_model_fixed.py` first.")
         st.stop()
 
     model, scaler, feat_cols, explainer = load_artefacts()
@@ -170,6 +170,7 @@ def main():
 
         st.subheader("Churn Probability")
         bar_color = "#e74c3c" if prob > 0.65 else ("#f39c12" if prob > 0.35 else "#2ecc71")
+
         st.markdown(
             f"""
             <div style='background:#eee;border-radius:8px;height:22px;margin-bottom:16px;'>
@@ -182,14 +183,42 @@ def main():
             unsafe_allow_html=True,
         )
 
+        # 🔥 NEW: RETENTION RECOMMENDATIONS
+        st.divider()
+        st.subheader("💡 Retention Recommendations")
+
+        if prob > 0.65:
+            st.warning("⚠️ High churn risk — take action immediately")
+
+            if contract == "Month-to-month":
+                st.write("👉 Offer discount for long-term contract")
+
+            if online_security == "No":
+                st.write("👉 Recommend adding online security service")
+
+            if tech_support == "No":
+                st.write("👉 Offer free tech support trial")
+
+            if monthly_charges > 80:
+                st.write("👉 Provide pricing incentive or bundle offer")
+
+        elif prob > 0.35:
+            st.info("🟡 Medium churn risk — monitor customer")
+            st.write("👉 Consider engagement offers or loyalty benefits")
+
+        else:
+            st.success("🟢 Low churn risk")
+            st.write("👉 Maintain service quality and customer satisfaction")
+
         st.divider()
 
         st.subheader("🔍 Why did the model predict this?")
         st.caption(
-            "**Red bars** push the prediction *towards* churn.  "
-            "**Blue bars** push it *away* from churn.  "
+            "**Red bars** push the prediction towards churn. "
+            "**Blue bars** push it away from churn. "
             "The longer the bar, the bigger the impact."
         )
+
         fig = shap_waterfall_fig(explainer, row_s, feat_cols)
         st.pyplot(fig, use_container_width=True)
         plt.close()
@@ -202,35 +231,23 @@ def main():
         with tab1:
             path = os.path.join(PLOT_DIR, "evaluation.png")
             if os.path.exists(path):
-                st.image(path, use_column_width=True)
+                st.image(path, use_container_width=True)
+
         with tab2:
             path = os.path.join(PLOT_DIR, "shap_summary.png")
             if os.path.exists(path):
-                st.image(path, use_column_width=True)
+                st.image(path, use_container_width=True)
             path2 = os.path.join(PLOT_DIR, "shap_dependence.png")
             if os.path.exists(path2):
-                st.image(path2, use_column_width=True)
+                st.image(path2, use_container_width=True)
+
         with tab3:
             path = os.path.join(PLOT_DIR, "feature_importance.png")
             if os.path.exists(path):
-                st.image(path, use_column_width=True)
+                st.image(path, use_container_width=True)
 
     else:
-        st.info("👈  Fill in the customer profile in the sidebar, then click **Predict Churn**.")
-
-        st.subheader("About this project")
-        cols = st.columns(3)
-        with cols[0]:
-            st.markdown("**🤖 Model**\n\nXGBoost with class-imbalance correction via `scale_pos_weight`")
-        with cols[1]:
-            st.markdown("**📐 Evaluation**\n\nROC-AUC, accuracy, 5-fold cross-validation")
-        with cols[2]:
-            st.markdown("**💡 Explainability**\n\nSHAP TreeExplainer — per-prediction waterfall charts")
-
-        if os.path.exists(os.path.join(PLOT_DIR, "shap_summary.png")):
-            st.subheader("Overall SHAP Feature Impact")
-            st.image(os.path.join(PLOT_DIR, "shap_summary.png"), use_column_width=True)
-
+        st.info("👈 Fill in the customer profile in the sidebar, then click Predict Churn.")
 
 if __name__ == "__main__":
     main()
