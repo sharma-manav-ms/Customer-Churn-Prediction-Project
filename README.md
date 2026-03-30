@@ -1,86 +1,172 @@
-# Customer Churn Prediction
+# 🚀 Customer Churn Prediction
 
-A machine learning project for predicting telecom customer churn using XGBoost, featuring SHAP explainability and an interactive Streamlit web application.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-XGBoost-green)
+![Framework](https://img.shields.io/badge/Framework-Streamlit-red)
 
-## Features
+---
 
-- **Predictive Modeling**: XGBoost classifier with class imbalance handling
-- **Explainability**: SHAP-based feature attribution with waterfall plots
-- **Web Interface**: Streamlit app for real-time predictions
-- **Feature Engineering**: Custom features like charge ratio and service counts
-- **Evaluation**: Comprehensive metrics including ROC-AUC and cross-validation
+## 📌 Problem Statement
 
-## Installation
+Customer churn is one of the biggest challenges for subscription-based businesses. Losing customers directly impacts revenue and growth.
+This project aims to **predict whether a customer will churn** so that companies can take proactive measures to retain them.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/sharma-manav-ms/customer-churn-prediction.git
-   cd customer-churn-prediction
-   ```
+---
 
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 💡 Solution Overview
 
-## Usage
+This project uses a **Machine Learning model (XGBoost)** to predict churn probability based on customer data.
+It also integrates **SHAP (SHapley Additive exPlanations)** to explain *why* a prediction was made.
 
-1. **Train the Model** (run once):
-   ```bash
-   python train_model.py
-   ```
-   This downloads the dataset, preprocesses data, trains the model, and generates evaluation plots.
+An interactive **Streamlit web app** allows users to input customer details and get real-time predictions.
 
-2. **Run the Web App**:
-   ```bash
-   streamlit run app.py
-   ```
-   Access the application at `http://localhost:8501` to input customer profiles and view predictions with SHAP explanations.
+---
 
-## Project Structure
+## ⚙️ Features
+
+* 🔍 Predict churn probability
+* 📊 Risk classification (Low / Medium / High)
+* 🧠 Model explainability using SHAP
+* 📈 Visual insights with SHAP summary & waterfall plots
+* 🎯 User-friendly Streamlit interface
+
+---
+
+## 🛠 Tech Stack
+
+* **Programming:** Python
+* **Libraries:** Scikit-learn, XGBoost, SHAP, Pandas, NumPy
+* **Visualization:** Matplotlib, Seaborn
+* **Deployment/UI:** Streamlit
+
+---
+
+## 📊 Model Performance
+
+* **ROC-AUC Score:** 0.84
+* **Validation:** 5-Fold Cross Validation
+* **Handling Imbalance:** scale_pos_weight in XGBoost
+
+---
+
+## ⚖️ Model Comparison
+
+| Model               | ROC-AUC |
+| ------------------- | ------- |
+| Logistic Regression | 0.78    |
+| Random Forest       | 0.82    |
+| XGBoost             | 0.84    |
+
+---
+
+## 🔍 Key Insights
+
+* Customers with **month-to-month contracts** are more likely to churn
+* **Fiber optic users** show higher churn probability
+* **Online security services** reduce churn risk
+* Higher monthly charges can increase churn likelihood
+
+---
+
+## 📈 Business Recommendations
+
+* 🎯 Encourage customers to switch to long-term contracts
+* 💰 Offer discounts or retention offers to high-risk users
+* 🔒 Promote add-on services like online security
+* 📞 Target high-risk customers with personalized outreach
+
+---
+
+## 🧠 Model Explainability (SHAP)
+
+* 🔴 Red bars → Increase churn probability
+* 🔵 Blue bars → Decrease churn probability
+* 📏 Longer bars → Greater impact on prediction
+
+This helps in understanding the **reason behind each prediction**, making the model transparent and trustworthy.
+
+---
+
+## 📸 Screenshots
+
+### 🔹 Application Interface
+
+(Add your screenshot here)
+
+### 🔹 Prediction Output
+
+(Add your screenshot here)
+
+### 🔹 SHAP Explanation
+
+(Add your screenshot here)
+
+### 🔹 Model Evaluation
+
+(Add your screenshot here)
+
+---
+
+## 🚀 Live Demo
+
+👉 (Add your Streamlit deployment link here)
+
+---
+
+## 🛠 Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/sharma-manav-ms/Customer-Churn-Prediction-Project.git
+cd Customer-Churn-Prediction-Project
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📁 Project Structure
 
 ```
-customer-churn-prediction/
-├── data/
-│   └── telco_churn.csv          # Auto-downloaded dataset
+Customer-Churn-Prediction-Project/
+│
+├── app.py
 ├── model/
-│   ├── churn_model.pkl          # Trained XGBoost model
-│   ├── scaler.pkl               # Feature scaler
-│   ├── feature_cols.pkl         # Feature column order
-│   └── shap_explainer.pkl       # SHAP explainer object
-├── shap_plots/
-│   ├── evaluation.png           # Model evaluation plots
-│   ├── shap_summary.png         # SHAP summary plot
-│   ├── shap_bar.png             # SHAP bar plot
-│   └── shap_dependence.png      # SHAP dependence plot
-├── train_model.py               # Training pipeline
-├── app.py                       # Streamlit application
-├── requirements.txt             # Python dependencies
-└── README.md
+├── data/
+├── notebooks/
+├── requirements.txt
+├── README.md
 ```
 
-## Technologies
+---
 
-- **Python 3.x**
-- **XGBoost** for classification
-- **SHAP** for model explainability
-- **Streamlit** for web interface
-- **Scikit-learn** for preprocessing and evaluation
-- **Pandas & NumPy** for data manipulation
-- **Matplotlib** for plotting
+## 📌 Future Improvements
 
-## Dataset
+* 🌐 Deploy the app online (Streamlit Cloud)
+* 📊 Add more model comparisons
+* ⚡ Improve UI/UX design
+* 🔄 Real-time data integration
 
-The project uses the [IBM Telco Customer Churn Dataset](https://github.com/IBM/telco-customer-churn-on-icp4d) from Kaggle, containing 7,043 customer records with 20 features including demographics, service subscriptions, and billing information.
+---
 
-## Model Performance
+## 👨‍💻 Author
 
-- **Test Accuracy**: ~81%
-- **Test ROC-AUC**: ~86%
-- **Cross-Validation ROC-AUC** (5-fold): ~84%
+**Manav Sharma**
+📌 Aspiring Data Scientist | Machine Learning Enthusiast
 
-## Author
+---
 
-**Manav Sharma**  
-[LinkedIn](https://www.linkedin.com/in/manav-sharma-682b0021b) 
-[GitHub](https://github.com/sharma-manavms)
+## ⭐ If you like this project
+
+Give it a ⭐ on GitHub and share it!
