@@ -113,6 +113,13 @@ This helps in understanding the **reason behind each prediction**, making the mo
 
 ---
 
+## 📈 Business Recommendations
+* Encourage long-term contracts to reduce churn
+* Offer incentives for high-risk customers
+* Promote online security services to improve retention
+
+---
+
 ## 🛠 Installation & Setup
 
 Clone the repository:
